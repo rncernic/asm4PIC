@@ -1,7 +1,7 @@
 # asm4PIC
 
 **asm4PIC** is a simple command-line assembler for **Microchip PIC12** and **PIC16** microcontrollers.  
-It converts assembly source files (`.asm`) into Intel HEX (`.hex`) files suitable for programming your device.  
+It converts assembly source files (`.asm`) into HEX (`.hex`) files suitable for programming the device.  
 Currently tested with **PIC16F687** and **PIC16F886**.
 
 ---
