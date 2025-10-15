@@ -1,0 +1,156 @@
+                            Assembly Process Report
+
+================================================================================
+                             Original Assembly Code
+================================================================================
+   1:     ; LED Blink Example for PIC16F886 (RA0)
+   2:     
+   3:     #DEFINE LED_PIN RA0
+   4:     #DEFINE LON BSF PORTA, RA0
+   5:     #DEFINE LOFF BCF PORTA, RA0
+   6:     
+   7:     BANK0   MACRO
+   8:                 BCF STATUS, RP0
+   9:                 BCF STATUS, RP1
+  10:             ENDM
+  11:             
+  12:     BANK1   MACRO
+  13:                 BSF STATUS, RP0
+  14:                 BCF STATUS, RP1
+  15:             ENDM
+  16:     
+  17:     BANK2   MACRO
+  18:                 BCF STATUS, RP0
+  19:                 BSF STATUS, RP1
+  20:             ENDM
+  21:     
+  22:     BANK3   MACRO
+  23:                 BSF STATUS, RP0
+  24:                 BSF STATUS, RP1
+  25:             ENDM
+  26:             
+  27:     
+  28:     LEDON	MACRO
+  29:             INIT:
+  30:                 BSF		PORTA, LED_PIN
+  31:             ENDM
+  32:     
+  33:     __CONFIG _FOSC_INTOSCIO & _WDTE_OFF & _LVP_OFF & _CP_OFF & _CPD_OFF ; Internal RC, WDT off, LVP off, CP off, CPD off
+  34:     ORG 0x000
+  35:     GOTO    INIT            ; Go to initialization routine
+  36: 
+  37:     ; --- Main Program ---
+  38:     MAIN_LOOP:
+  39:         ORG		0x005			; Should start at 0x005 to skip interrupt vector at 0x004
+  40:         ;BSF PORTA, RA0			; Turn LED ON (Set RA0 high)
+  41:         LEDON
+  42:         CALL    DELAY_500MS     ; Delay
+  43:         ;BCF     PORTA, RA0      ; Turn LED OFF (Clear RA0 low)
+  44:         LOFF
+  45:         CALL    DELAY_500MS     ; Delay
+  46:         GOTO    MAIN_LOOP       ; Loop indefinitely
+  47: 
+  48:     ; --- Initialization Routine ---
+  49:     INIT:
+  50:         ; Configure RA0 as digital I/O (ANSEL/ANSELH)
+  51:         ;BCF     STATUS, RP1     ; Select Bank 0 (RP1=0, RP0=0)
+  52:         ;BCF     STATUS, RP0
+  53:         BANK2
+  54:         CLRF    ANSEL           ; Ensure all ANSEL bits are cleared for digital I/O
+  55:         CLRF    ANSELH          ; Ensure all ANSELH bits are cleared for digital I/O
+  56: 
+  57:         ; Configure RA0 as output (TRISA)
+  58:         ;BSF     STATUS, RP0     ; Select Bank 1 (RP1=0, RP0=1)
+  59:         BANK1
+  60:         BCF     TRISA, RA0      ; Clear TRISA bit 0 to make RA0 an output
+  61: 
+  62:         BCF     STATUS, RP0     ; Select Bank 0 again for PORTA access
+  63:         CLRF    PORTA           ; Ensure PORTA is initially low
+  64: 
+  65:         GOTO    MAIN_LOOP       ; Start main program loop
+  66: 
+  67:     ; --- Delay Subroutine (approx 500ms for 8MHz internal osc) ---
+  68:     ; This delay is an approximation. For 8MHz internal oscillator,
+  69:     ; 1 instruction cycle = 0.5 us. For 500ms, we need 1,000,000 cycles.
+  70:     ; This 3-nested loop provides approx 977,620 cycles.
+  71:     DELAY_500MS:
+  72:         MOVLW   0x0A            ; Load 10 into W (Outer loop count)
+  73:         MOVWF   DLY_OUTER       ; Move to DLY_OUTER
+  74:     OUTER_LOOP:
+  75:         MOVLW   0x82            ; Load 130 into W (Middle loop count)
+  76:         MOVWF   DLY_MIDDLE      ; Move to DLY_MIDDLE
+  77:     MIDDLE_LOOP:
+  78:         MOVLW   0xFA            ; Load 250 into W (Inner loop count)
+  79:         MOVWF   DLY_INNER       ; Move to DLY_INNER
+  80:     INNER_LOOP:
+  81:         NOP                     ; 1 cycle
+  82:         DECFSZ  DLY_INNER, F    ; 1 cycle (skip) or 2 cycles (no skip)
+  83:         GOTO    INNER_LOOP      ; 2 cycles
+  84:         DECFSZ  DLY_MIDDLE, F   ; 1 cycle (skip) or 2 cycles (no skip)
+  85:         GOTO    MIDDLE_LOOP     ; 2 cycles
+  86:         DECFSZ  DLY_OUTER, F    ; 1 cycle (skip) or 2 cycles (no skip)
+  87:         GOTO    OUTER_LOOP      ; 2 cycles
+  88:         RETURN                  ; 2 cycles
+  89: 
+  90:     ; --- RAM Variables ---
+  91:     DLY_OUTER   EQU     0x20    ; Delay loop counter 1
+  92:     DLY_MIDDLE  EQU     0x21    ; Delay loop counter 2
+  93:     DLY_INNER   EQU     0x22    ; Delay loop counter 3
+  94: 
+  95:     ; --- Bit Definitions (for clarity, usually in .inc files) ---
+  96:     RA0         EQU     0x00    ; PORTA bit 0
+  97:     RP0         EQU     0x05    ; STATUS register bit 5
+  98:     RP1         EQU     0x06    ; STATUS register bit 6
+  99: 
+ 100:     END
+ 101: 
+
+================================================================================
+                             Labels (Symbol Table)
+================================================================================
+  DELAY_500MS          -> 0x0014
+  INIT                 -> 0x000A
+  INIT_M0              -> 0x0005
+  INNER_LOOP           -> 0x001A
+  MAIN_LOOP            -> 0x0001
+  MIDDLE_LOOP          -> 0x0018
+  OUTER_LOOP           -> 0x0016
+
+================================================================================
+                              Configuration Words
+================================================================================
+  CONFIG1              = 0x3FF7
+
+================================================================================
+                             Generated Machine Code
+================================================================================
+  0x0000: 0x280A
+  0x0005: 0x1405
+  0x0006: 0x2014
+  0x0007: 0x1005
+  0x0008: 0x2014
+  0x0009: 0x2801
+  0x000A: 0x1283
+  0x000B: 0x1703
+  0x000C: 0x01DE
+  0x000D: 0x01DF
+  0x000E: 0x1683
+  0x000F: 0x1303
+  0x0010: 0x1005
+  0x0011: 0x1283
+  0x0012: 0x0185
+  0x0013: 0x2801
+  0x0014: 0x300A
+  0x0015: 0x00A0
+  0x0016: 0x3082
+  0x0017: 0x00A1
+  0x0018: 0x30FA
+  0x0019: 0x00A2
+  0x001A: 0x0000
+  0x001B: 0x0BA2
+  0x001C: 0x281A
+  0x001D: 0x0BA1
+  0x001E: 0x2818
+  0x001F: 0x0BA0
+  0x0020: 0x2816
+  0x0021: 0x0008

@@ -1,0 +1,361 @@
+{
+  "PROGRAM_MEMORY_SIZE": 2048,
+  "TOTAL_MEMORY_BYTES": 4096,
+  "PROGRAM_WORD_SIZE_BITS": 14,
+  "INSTRUCTION_SET": {
+    "ADDWF": {
+      "opcode_pattern": "000111dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "ANDWF": {
+      "opcode_pattern": "000101dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "CLRF": {
+      "opcode_pattern": "0000011fffffff",
+      "operands": [
+        "f"
+      ]
+    },
+    "CLRW": {
+      "opcode_pattern": "00000100000000",
+      "operands": []
+    },
+    "COMF": {
+      "opcode_pattern": "001001dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "DECF": {
+      "opcode_pattern": "000011dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "DECFSZ": {
+      "opcode_pattern": "001011dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "INCF": {
+      "opcode_pattern": "001010dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "INCFSZ": {
+      "opcode_pattern": "001111dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "IORWF": {
+      "opcode_pattern": "000100dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "MOVF": {
+      "opcode_pattern": "001000dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "MOVWF": {
+      "opcode_pattern": "0000001fffffff",
+      "operands": [
+        "f"
+      ]
+    },
+    "NOP": {
+      "opcode_pattern": "00000000000000",
+      "operands": []
+    },
+    "RLF": {
+      "opcode_pattern": "001101dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "RRF": {
+      "opcode_pattern": "001100dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "SUBWF": {
+      "opcode_pattern": "000010dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "SWAPF": {
+      "opcode_pattern": "001110dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "XORWF": {
+      "opcode_pattern": "000110dfffffff",
+      "operands": [
+        "f",
+        "d"
+      ]
+    },
+    "BCF": {
+      "opcode_pattern": "0100bbbfffffff",
+      "operands": [
+        "f",
+        "b"
+      ]
+    },
+    "BSF": {
+      "opcode_pattern": "0101bbbfffffff",
+      "operands": [
+        "f",
+        "b"
+      ]
+    },
+    "BTFSC": {
+      "opcode_pattern": "0110bbbfffffff",
+      "operands": [
+        "f",
+        "b"
+      ]
+    },
+    "BTFSS": {
+      "opcode_pattern": "0111bbbfffffff",
+      "operands": [
+        "f",
+        "b"
+      ]
+    },
+    "ADDLW": {
+      "opcode_pattern": "111110LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    },
+    "ANDLW": {
+      "opcode_pattern": "111001LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    },
+    "CALL": {
+      "opcode_pattern": "100kkkkkkkkkkk",
+      "operands": [
+        "k11"
+      ]
+    },
+    "CLRWDT": {
+      "opcode_pattern": "00000000000100",
+      "operands": []
+    },
+    "GOTO": {
+      "opcode_pattern": "101kkkkkkkkkkk",
+      "operands": [
+        "k11"
+      ]
+    },
+    "IORLW": {
+      "opcode_pattern": "111000LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    },
+    "MOVLW": {
+      "opcode_pattern": "110000LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    },
+    "RETFIE": {
+      "opcode_pattern": "00000000001001",
+      "operands": []
+    },
+    "RETLW": {
+      "opcode_pattern": "110100LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    },
+    "RETURN": {
+      "opcode_pattern": "00000000001000",
+      "operands": []
+    },
+    "SLEEP": {
+      "opcode_pattern": "00000000000011",
+      "operands": []
+    },
+    "SUBLW": {
+      "opcode_pattern": "111101LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    },
+    "XORLW": {
+      "opcode_pattern": "111010LLLLLLLL",
+      "operands": [
+        "k8"
+      ]
+    }
+  },
+  "SFR_MAP": {
+    "TMR0": 1,
+    "PCL": 2,
+    "STATUS": 3,
+    "FSR": 4,
+    "PORTA": 5,
+    "PORTB": 6,
+    "PORTC": 7,
+    "PCLATH": 10,
+    "INTCON": 11,
+    "PIR1": 12,
+    "PIR2": 13,
+    "TMR1L": 14,
+    "TMR1H": 15,
+    "T1CON": 16,
+    "SSPBUF": 19,
+    "SSPCON": 20,
+    "RCSTA": 24,
+    "TXREG": 25,
+    "RCREG": 26,
+    "ADRESH": 30,
+    "ADCON0": 31,
+    "OPTION_REG": 129,
+    "TRISA": 133,
+    "TRISB": 134,
+    "TRISC": 135,
+    "PIE1": 140,
+    "PIE2": 141,
+    "PCON": 142,
+    "OSCCON": 143,
+    "OSCTUNE": 144,
+    "SSPADD": 147,
+    "SSPSTAT": 148,
+    "WPUA": 149,
+    "IOCA": 150,
+    "WDTCON": 151,
+    "TXSTA": 152,
+    "SPBRG": 153,
+    "SPBRGH": 154,
+    "BAUDCTL": 155,
+    "ADRESL": 158,
+    "ADCON1": 159,
+    "EEDAT": 204,
+    "EEADR": 205,
+    "WPUB": 213,
+    "IOCB": 214,
+    "VRCON": 216,
+    "CM1CON0": 217,
+    "CM2CON0": 218,
+    "CM2CON1": 219,
+    "ANSEL": 222,
+    "ANSELH": 223,
+    "EECON1": 332,
+    "EECON2": 333,
+    "SRCON": 350
+  },
+  "ALL_CONFIG_FUSE_MAPS": [
+    {
+      "FOSC": {
+        "mask": 7,
+        "values": {
+          "_FOSC_LP": 0,
+          "_FOSC_XT": 1,
+          "_FOSC_HS": 2,
+          "_FOSC_EC": 3,
+          "_FOSC_INTRCIO": 6,
+          "_FOSC_INTOSCIO": 7,
+          "_FOSC_ECLPIO": 4,
+          "_FOSC_ECPIO": 5
+        }
+      },
+      "WDTE": {
+        "mask": 8,
+        "values": {
+          "_WDTE_OFF": 0,
+          "_WDTE_ON": 8
+        }
+      },
+      "PWRTE": {
+        "mask": 16,
+        "values": {
+          "_PWRTE_OFF": 16,
+          "_PWRTE_ON": 0
+        }
+      },
+      "MCLRE": {
+        "mask": 32,
+        "values": {
+          "_MCLRE_OFF": 0,
+          "_MCLRE_ON": 32
+        }
+      },
+      "CP": {
+        "mask": 64,
+        "values": {
+          "_CP_OFF": 64,
+          "_CP_ON": 0
+        }
+      },
+      "CPD": {
+        "mask": 128,
+        "values": {
+          "_CPD_OFF": 128,
+          "_CPD_ON": 0
+        }
+      },
+      "BOREN": {
+        "mask": 768,
+        "values": {
+          "_BOREN_OFF": 0,
+          "_BOREN_ON": 768,
+          "_BOREN_NSLEEP": 256,
+          "_BOREN_SBODEN": 512
+        }
+      },
+      "IESO": {
+        "mask": 1024,
+        "values": {
+          "_IESO_OFF": 0,
+          "_IESO_ON": 1024
+        }
+      },
+      "FCMEN": {
+        "mask": 2048,
+        "values": {
+          "_FCMEN_OFF": 0,
+          "_FCMEN_ON": 2048
+        }
+      }
+    }
+  ],
+  "CONFIG_WORD_DEFAULTS": {
+    "CONFIG1": {
+      "address": 8199,
+      "default_value": 16383,
+      "padding": 12288
+    }
+  }
+}
